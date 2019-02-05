@@ -1,14 +1,15 @@
-﻿using AspNetCore.Security.Auth0.Interfaces;
+﻿using AspNetCore.Security.Auth0.Interfaces.Internal;
 using AspNetCore.Security.Auth0.Models;
 using AspNetCore.Security.Auth0.Options;
 using AspNetCore.Security.Auth0.Validation;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using AspNetCore.Security.Auth0.Interfaces.Internal;
 
 namespace AspNetCore.Security.Auth0.Authorization
 {
@@ -26,13 +27,16 @@ namespace AspNetCore.Security.Auth0.Authorization
 
         private readonly IAuth0ClientFactory _factory;
         private readonly Auth0Options _options;
+        private readonly ILogger<HasScopeHandler> _logger;
 
-        public HasScopeHandler(IAuth0ClientFactory factory, IOptions<Auth0Options> options)
+        public HasScopeHandler([NotNull] IAuth0ClientFactory factory, [NotNull] IOptions<Auth0Options> options, [NotNull]  ILogger<HasScopeHandler> logger)
         {
             Guard.NotNull(factory, nameof(factory));
             Guard.NotNull(options, nameof(options));
+            Guard.NotNull(logger, nameof(logger));
 
             _factory = factory;
+            _logger = logger;
             _options = options.Value;
         }
 
@@ -42,28 +46,28 @@ namespace AspNetCore.Security.Auth0.Authorization
         /// <param name="context">The authorization context.</param>
         /// <param name="requirement">The requirement to evaluate.</param>
         /// <returns>Task</returns>
-        protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, HasScopeRequirement requirement)
+        protected override async Task HandleRequirementAsync([NotNull] AuthorizationHandlerContext context, [NotNull] HasScopeRequirement requirement)
         {
             Guard.NotNull(context, nameof(context));
             Guard.NotNull(requirement, nameof(requirement));
 
             if (!UserHasRequiredScopeRequirement(context, requirement))
             {
-                // TODO logging
+                _logger.LogWarning("User '{IdentityName}' does not have the required scope '{scope}'.", context.User.Identity.Name, string.Join(",", requirement.Scope));
                 return;
             }
 
             var nameIdentifierClaim = GetNameIdentifierClaim(context);
             if (nameIdentifierClaim == null)
             {
-                // TODO logging
+                _logger.LogWarning("User '{IdentityName}' does not have the required NameIdentifierClaimType.", context.User.Identity.Name);
                 return;
             }
 
             var user = await GetUserAsync(nameIdentifierClaim.Value);
             if (user?.AppMetadata == null)
             {
-                // TODO logging
+                _logger.LogWarning("User with userid '{UserId}' does not have any AppMetadata defined.", nameIdentifierClaim.Value);
                 return;
             }
 

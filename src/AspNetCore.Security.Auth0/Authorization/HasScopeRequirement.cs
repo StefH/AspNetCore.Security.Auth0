@@ -21,7 +21,7 @@ namespace AspNetCore.Security.Auth0.Authorization
         /// </summary>
         /// <param name="scope">The scope.</param>
         /// <param name="issuer">The issuer.</param>
-        public HasScopeRequirement(string scope, string issuer)
+        public HasScopeRequirement([NotNull] string scope, [NotNull] string issuer)
         {
             Guard.NotNull(scope, nameof(scope));
             Guard.NotNull(issuer, nameof(issuer));

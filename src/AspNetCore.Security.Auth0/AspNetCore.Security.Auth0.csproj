@@ -8,7 +8,7 @@
     <PackageId>AspNetCore.Security.Auth0</PackageId>
     <PackageTags>AspNetCore.Security.Auth0;AspNetCore;Security;Auth0;Jwt;token</PackageTags>
     <PackageReleaseNotes>See CHANGELOG.md</PackageReleaseNotes>
-    <PackageIconUrl>https://raw.githubusercontent.com/stefh/AspNetCore.Security.Auth0/master/resources/logo_128x128.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/stefh/AspNetCore.Security.Auth0/master/resources/auth0-logo.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/stefh/AspNetCore.Security.Auth0</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/stefh/AspNetCore.Security.Auth0/master/LICENSE</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
@@ -39,6 +39,7 @@
     <PackageReference Include="RestEase" Version="1.4.7" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.1.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.1" />
   </ItemGroup>
 
 </Project>

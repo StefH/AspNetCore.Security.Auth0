@@ -1,13 +1,12 @@
 ﻿using AspNetCore.Security.Auth0.Authorization;
 using AspNetCore.Security.Auth0.Implementations;
-using AspNetCore.Security.Auth0.Interfaces;
+using AspNetCore.Security.Auth0.Interfaces.Internal;
 using AspNetCore.Security.Auth0.Options;
 using AspNetCore.Security.Auth0.Validation;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using System;
-using AspNetCore.Security.Auth0.Interfaces.Internal;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection
