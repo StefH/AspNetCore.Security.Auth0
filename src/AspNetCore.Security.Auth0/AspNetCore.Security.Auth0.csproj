@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Package for integrating JWT Bearer Token Security from Auth0 into a ASP .NET Core 2.0+ app.</Description>
+    <Title>AspNetCore.Security.Auth0</Title>
+    <Authors>Stef Heyenrath</Authors>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <PackageId>AspNetCore.Security.Auth0</PackageId>
+    <PackageTags>AspNetCore.Security.Auth0;AspNetCore;Security;Auth0;Jwt;token</PackageTags>
+    <PackageReleaseNotes>See CHANGELOG.md</PackageReleaseNotes>
+    <PackageIconUrl>https://raw.githubusercontent.com/stefh/AspNetCore.Security.Auth0/master/resources/logo_128x128.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/stefh/AspNetCore.Security.Auth0</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/stefh/AspNetCore.Security.Auth0/master/LICENSE</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/stefh/AspNetCore.Security.Auth0</RepositoryUrl>
+    <DebugType>full</DebugType>
+    <IncludeSymbols>True</IncludeSymbols>
+    <ProjectGuid>{EE65A98A-FC2F-4FF8-8717-7332267EE8E8}</ProjectGuid>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2018.3.0">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="2.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="RestEase" Version="1.4.7" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="2.1.1" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+  </ItemGroup>
+
+</Project>
