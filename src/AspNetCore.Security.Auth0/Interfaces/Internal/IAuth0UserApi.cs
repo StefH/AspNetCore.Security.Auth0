@@ -1,7 +1,7 @@
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using AspNetCore.Security.Auth0.Models;
 using RestEase;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace AspNetCore.Security.Auth0.Interfaces.Internal
 {
@@ -10,6 +10,12 @@ namespace AspNetCore.Security.Auth0.Interfaces.Internal
     /// </summary>
     internal interface IAuth0UserApi : IAuth0Api
     {
+        /// <summary>
+        /// The Auth0 domain (host).
+        /// </summary>
+        [Path("domain", UrlEncode = false)]
+        string Endpoint { get; set; }
+
         /// <summary>
         /// Gets or sets the Authorization Header (bearer).
         /// </summary>

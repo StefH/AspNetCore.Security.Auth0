@@ -1,13 +1,10 @@
 ﻿using AspNetCore.Security.Auth0.Interfaces.Internal;
 using AspNetCore.Security.Auth0.Models;
-using AspNetCore.Security.Auth0.Options;
 using AspNetCore.Security.Auth0.Validation;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -25,19 +22,16 @@ namespace AspNetCore.Security.Auth0.Authorization
         private static string NameIdentifierClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
         private static string ScopeType = "scope";
 
-        private readonly IAuth0ClientFactory _factory;
-        private readonly Auth0Options _options;
+        private readonly IAuth0UserService _userService;
         private readonly ILogger<HasScopeHandler> _logger;
 
-        public HasScopeHandler([NotNull] IAuth0ClientFactory factory, [NotNull] IOptions<Auth0Options> options, [NotNull]  ILogger<HasScopeHandler> logger)
+        public HasScopeHandler([NotNull] IAuth0UserService userService, [NotNull]  ILogger<HasScopeHandler> logger)
         {
-            Guard.NotNull(factory, nameof(factory));
-            Guard.NotNull(options, nameof(options));
+            Guard.NotNull(userService, nameof(userService));
             Guard.NotNull(logger, nameof(logger));
 
-            _factory = factory;
+            _userService = userService;
             _logger = logger;
-            _options = options.Value;
         }
 
         /// <summary>
@@ -64,10 +58,10 @@ namespace AspNetCore.Security.Auth0.Authorization
                 return;
             }
 
-            var user = await GetUserAsync(nameIdentifierClaim.Value);
+            var user = await _userService.GetUserAsync(nameIdentifierClaim.Value);
             if (user?.AppMetadata == null)
             {
-                _logger.LogWarning("User with userid '{UserId}' does not have any AppMetadata defined.", nameIdentifierClaim.Value);
+                _logger.LogWarning("User '{IdentityName}' with userid '{UserId}' does not have any AppMetadata defined.", context.User.Identity.Name, nameIdentifierClaim.Value);
                 return;
             }
 
@@ -97,34 +91,12 @@ namespace AspNetCore.Security.Auth0.Authorization
         /// </summary>
         private Claim GetNameIdentifierClaim(AuthorizationHandlerContext context)
         {
-            // Claim "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier" has the value (user-id `auth0|5b02c858dc67155d2b5f7fdc`)
+            // Claim "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier" has the value (user-id `auth0|5b02c820dc67155d2b5f7fdc`)
             return context.User.Claims.FirstOrDefault(c => c.Type == NameIdentifierClaimType);
         }
 
-        private async Task<User> GetUserAsync(string userId)
-        {
-            var tokenClient = _factory.CreateClient<IAuth0TokenApi>();
-            tokenClient.Domain = _options.Domain;
-
-            // Get a Access Token (as Machine 2 Machine application)
-            var request = new Auth0AccessTokenRequest
-            {
-                ClientId = _options.ClientId,
-                ClientSecret = _options.ClientSecret,
-                Audience = _options.Audience
-            };
-            var token = await tokenClient.GetTokenAsync(request);
-
-            // Call the management api to retrieve a user
-            var userClient = _factory.CreateClient<IAuth0UserApi>();
-            userClient.Domain = $"{_options.Domain}api/v2/";
-            userClient.Authorization = new AuthenticationHeaderValue(token.TokenType, token.AccessToken);
-
-            return await userClient.GetAsync(userId);
-        }
-
         /// <summary>
-        /// Adds the user identity to the context and mark the specified requirement as being successfully evaluated.
+        /// Adds the Auth0ClaimsIdentity to the context and mark the specified requirement as being successfully evaluated.
         /// </summary>
         private void AddUserIdentityToContext(AuthorizationHandlerContext context, HasScopeRequirement requirement, User user)
         {

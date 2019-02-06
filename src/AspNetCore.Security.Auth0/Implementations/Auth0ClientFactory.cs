@@ -1,10 +1,9 @@
-﻿using AspNetCore.Security.Auth0.Interfaces;
+﻿using AspNetCore.Security.Auth0.Interfaces.Internal;
 using AspNetCore.Security.Auth0.Validation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RestEase;
 using System.Net.Http;
-using AspNetCore.Security.Auth0.Interfaces.Internal;
 
 namespace AspNetCore.Security.Auth0.Implementations
 {

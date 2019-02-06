@@ -48,8 +48,11 @@ namespace Microsoft.Extensions.DependencyInjection
             // register the scope authorization handler
             services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
-            // register the IHttpClientFactory and IAuth0ClientFactory
+            // register the IAuth0ClientFactory
             services.AddSingleton<IAuth0ClientFactory, Auth0ClientFactory>();
+
+            // register the IAuth0UserService
+            services.AddSingleton<IAuth0UserService, Auth0UserService>();
         }
 
         private static void AddJwtBearerAuthentication(this IServiceCollection services, Auth0Options auth0Options)

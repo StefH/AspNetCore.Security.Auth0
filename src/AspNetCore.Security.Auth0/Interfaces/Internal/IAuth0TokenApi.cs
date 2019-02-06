@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
 using AspNetCore.Security.Auth0.Models;
 using RestEase;
+using System.Threading.Tasks;
 
 namespace AspNetCore.Security.Auth0.Interfaces.Internal
 {
@@ -9,6 +9,12 @@ namespace AspNetCore.Security.Auth0.Interfaces.Internal
     /// </summary>
     internal interface IAuth0TokenApi : IAuth0Api
     {
+        /// <summary>
+        /// The Auth0 domain (host).
+        /// </summary>
+        [Path("domain", UrlEncode = false)]
+        string Domain { get; set; }
+
         /// <summary>
         /// Get access-token.
         /// </summary>
