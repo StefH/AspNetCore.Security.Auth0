@@ -7,9 +7,14 @@ Asp Net Core Jwt Bearer Token Security package for integration with Auth0.
 | --- | --- |
 | **NuGet** | [![NuGet Badge](https://buildstats.info/nuget/AspNetCore.Security.Auth0)](https://www.nuget.org/packages/AspNetCore.Security.Auth0) |
 
-# Usage
+## Auth0 settings
+You need two applications :
+1. **Single Page Application**:  used to authenticate the user in a SPA
+2. **Machine to Machine**: used by this project to read users + profile (AppData)
 
-## appsettings.json
+## C# Project changes
+
+### appsettings.json
 ``` json
 "Auth0Options": {
     "JwtAuthority": "https://abc.eu.auth0.com/",
@@ -23,9 +28,9 @@ Asp Net Core Jwt Bearer Token Security package for integration with Auth0.
 }
 ```
 
-## Startup.cs
+### Startup.cs
 
-#### ConfigureServices()
+##### ConfigureServices()
 ``` c#
 public void ConfigureServices(IServiceCollection services)
 {
@@ -57,7 +62,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-#### Configure()
+##### Configure()
 
 ``` c#
 public void Configure(...)
