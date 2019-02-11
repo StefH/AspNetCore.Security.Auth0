@@ -12,6 +12,8 @@ You need two applications :
 1. **Single Page Application**:  used to authenticate the user in a SPA
 2. **Machine to Machine**: used by this project to read users + profile (AppData)
 
+See the [wiki : HowTo](https://github.com/StefH/AspNetCore.Security.Auth0/wiki/HowTo) for more details.
+
 ## C# Project changes
 
 ### appsettings.json
@@ -50,14 +52,14 @@ public void ConfigureServices(IServiceCollection services)
     {
         var section = Configuration.GetSection("Auth0Options");
 
-        options.JwtAuthority = section["JwtAuthority"];
-        options.JwtAudience = section["JwtAudience"];
+        options.JwtAuthority = section["JwtAuthority"]; // Something like https://abc.eu.auth0.com/
+        options.JwtAudience = section["JwtAudience"]; // The API Identfier
 
-        options.Audience = section["Audience"];
-        options.ClientId = section["ClientId"];
-        options.ClientSecret = section["ClientSecret"];
-        options.Domain = section["Domain"];
-        options.Policies = section.GetSection("Policies").Get<List<string>>();
+        options.Audience = section["Audience"]; // Something like https://abc.eu.auth0.com/api/v2/
+        options.ClientId = section["ClientId"]; // The Client ID from the Machine 2 Machine
+        options.ClientSecret = section["ClientSecret"]; // The Client Secret from the Machine 2 Machine
+        options.Domain = section["Domain"]; // Something like https://abc.eu.auth0.com/
+        options.Policies = section.GetSection("Policies").Get<List<string>>(); The policies, like "read:data" and "write:data"
     });
 }
 ```
@@ -71,5 +73,21 @@ public void Configure(...)
     app.UseAuthentication();
 
     app.UseMvc();
+}
+```
+
+##### Controllers
+
+Update your controllers to add *Authorize* and use the correct *policy*:
+
+``` c#
+namespace Sample.Frontend.Controllers
+{
+    [Authorize("read:data")]
+    [ApiController]
+    public class DataQueryController : ControllerBase
+    {
+        // more code ...
+    }
 }
 ```
