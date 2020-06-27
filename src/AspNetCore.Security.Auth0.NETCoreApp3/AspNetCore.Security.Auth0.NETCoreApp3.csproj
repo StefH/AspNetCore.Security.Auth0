@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>3.0.0</Version>
+    <Version>3.0.0-preview-01</Version>
     <Title>AspNetCore.Security.Auth0</Title>
     <PackageId>AspNetCore.Security.Auth0</PackageId>
     <Description>Package for integrating JWT Bearer Token Security from Auth0 in a .NET Core App 3.x</Description>

@@ -9,7 +9,7 @@
     <PackageReleaseNotes>See CHANGELOG.md</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/stefh/AspNetCore.Security.Auth0/master/resources/auth0-logo.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/stefh/AspNetCore.Security.Auth0</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/stefh/AspNetCore.Security.Auth0/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/stefh/AspNetCore.Security.Auth0</RepositoryUrl>
     <DebugType>full</DebugType>
