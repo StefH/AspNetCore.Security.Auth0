@@ -4,7 +4,29 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>1.0.0.0</VersionPrefix>
+    <Description>Package for integrating JWT Bearer Token Security from Auth0 into a ASP .NET Core 2.0+ app.</Description>
+    <Title>AspNetCore.Security.Auth0</Title>
+    <Authors>Stef Heyenrath</Authors>
+    <PackageId>AspNetCore.Security.Auth0</PackageId>
+    <PackageTags>AspNetCore.Security.Auth0;AspNetCore;Security;Auth0;Jwt;token</PackageTags>
+    <PackageReleaseNotes>See CHANGELOG.md</PackageReleaseNotes>
+    <PackageIconUrl>https://raw.githubusercontent.com/stefh/AspNetCore.Security.Auth0/master/resources/auth0-logo.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/stefh/AspNetCore.Security.Auth0</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/stefh/AspNetCore.Security.Auth0/master/LICENSE</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/stefh/AspNetCore.Security.Auth0</RepositoryUrl>
+    <DebugType>full</DebugType>
+    <IncludeSymbols>True</IncludeSymbols>
+    <ProjectGuid>{EE65A98A-FC2F-4FF8-8717-7332267EE8E8}</ProjectGuid>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <Choose>

@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Version>3.0.0</Version>
+    <TargetFrameworks>NETCoreApp3.0;NETCoreApp3.1</TargetFrameworks>
+    <RootNamespace>AspNetCore.Security.Auth0</RootNamespace>
+    <AssemblyName>AspNetCore.Security.Auth0</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2020.1.0">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="RestEase" Version="1.4.12" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'NETCoreApp3.0' ">
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.3" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'NETCoreApp3.1' ">
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--<Compile Remove="..\AspNetCore.Security.Auth0\AssemblyInfo.cs" />-->
+    <Compile Include="..\AspNetCore.Security.Auth0\*.cs;..\AspNetCore.Security.Auth0\*\*.cs;..\AspNetCore.Security.Auth0\*\*\*.cs" Exclude="..\AspNetCore.Security.Auth0\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
+  </ItemGroup>
+
+</Project>
