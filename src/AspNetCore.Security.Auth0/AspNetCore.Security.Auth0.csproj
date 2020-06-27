@@ -2,7 +2,11 @@
 
   <PropertyGroup>
     <Version>1.0.0.0</Version>
+    <Title>AspNetCore.Security.Auth0</Title>
+    <PackageId>AspNetCore.Security.Auth0</PackageId>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>Package for integrating JWT Bearer Token Security from Auth0 into a ASP .NET Core 2.0+ app.</Description>
+    <ProjectGuid>{EE65A98A-FC2F-4FF8-8717-7332267EE8E8}</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,5 +25,5 @@
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.1" />
   </ItemGroup>
- 
+
 </Project>
