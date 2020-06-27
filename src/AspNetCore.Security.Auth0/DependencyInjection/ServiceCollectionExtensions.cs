@@ -7,12 +7,22 @@ using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using System;
+using Microsoft.Extensions.Configuration;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
+        public static IServiceCollection AddAuth0([NotNull] this IServiceCollection services, [NotNull] IConfiguration config)
+        {
+            Guard.NotNull(services, nameof(services));
+            Guard.NotNull(config, nameof(config));
+
+            services.Configure<Auth0Options>(config);
+            return services;
+        }
+
         public static IServiceCollection AddAuth0([NotNull] this IServiceCollection services, [NotNull] Action<Auth0Options> configureAuth0Options)
         {
             Guard.NotNull(services, nameof(services));
