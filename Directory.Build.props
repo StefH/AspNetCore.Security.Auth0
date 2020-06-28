@@ -4,7 +4,25 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>1.0.0.0</VersionPrefix>
+    <Authors>Stef Heyenrath</Authors>
+    <PackageTags>AspNetCore.Security.Auth0;AspNetCore;Security;Auth0;Jwt;token</PackageTags>
+    <PackageReleaseNotes>See CHANGELOG.md</PackageReleaseNotes>
+    <PackageIconUrl>https://raw.githubusercontent.com/stefh/AspNetCore.Security.Auth0/master/resources/auth0-logo.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/stefh/AspNetCore.Security.Auth0</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/stefh/AspNetCore.Security.Auth0</RepositoryUrl>
+    <DebugType>full</DebugType>
+    <IncludeSymbols>True</IncludeSymbols>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <Choose>

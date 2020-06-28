@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using JetBrains.Annotations;
+using NN = JetBrains.Annotations.NotNullAttribute;
 
 // Copied from https://github.com/aspnet/EntityFramework/blob/dev/src/Shared/Check.cs
 namespace AspNetCore.Security.Auth0.Validation
@@ -16,7 +17,7 @@ namespace AspNetCore.Security.Auth0.Validation
     public static class Guard
     {
         [ContractAnnotation("value:null => halt")]
-        public static T Condition<T>([NoEnumeration] T value, [NotNull] Predicate<T> condition, [InvokerParameterName] [NotNull] string parameterName)
+        public static T Condition<T>([NoEnumeration] T value, [NN] Predicate<T> condition, [InvokerParameterName][NN] string parameterName)
         {
             NotNull(condition, nameof(condition));
             NotNull(value, nameof(value));
@@ -32,7 +33,7 @@ namespace AspNetCore.Security.Auth0.Validation
         }
 
         [ContractAnnotation("value:null => halt")]
-        public static T NotNull<T>([NoEnumeration] T value, [InvokerParameterName] [NotNull] string parameterName)
+        public static T NotNull<T>([NoEnumeration] T value, [InvokerParameterName][NN] string parameterName)
         {
             if (ReferenceEquals(value, null))
             {
@@ -45,7 +46,7 @@ namespace AspNetCore.Security.Auth0.Validation
         }
 
         [ContractAnnotation("value:null => halt")]
-        public static T NotNull<T>([NoEnumeration] T value, [InvokerParameterName] [NotNull] string parameterName, [NotNull] string propertyName)
+        public static T NotNull<T>([NoEnumeration] T value, [InvokerParameterName][NN] string parameterName, [NN] string propertyName)
         {
             if (ReferenceEquals(value, null))
             {
@@ -59,7 +60,7 @@ namespace AspNetCore.Security.Auth0.Validation
         }
 
         [ContractAnnotation("value:null => halt")]
-        public static IList<T> NotNullOrEmpty<T>(IList<T> value, [InvokerParameterName] [NotNull] string parameterName)
+        public static IList<T> NotNullOrEmpty<T>(IList<T> value, [InvokerParameterName][NN] string parameterName)
         {
             NotNull(value, parameterName);
 
@@ -74,7 +75,7 @@ namespace AspNetCore.Security.Auth0.Validation
         }
 
         [ContractAnnotation("value:null => halt")]
-        public static string NotNullOrEmpty(string value, [InvokerParameterName] [NotNull] string parameterName)
+        public static string NotNullOrEmpty(string value, [InvokerParameterName][NN] string parameterName)
         {
             Exception e = null;
             if (ReferenceEquals(value, null))
@@ -96,7 +97,7 @@ namespace AspNetCore.Security.Auth0.Validation
             return value;
         }
 
-        public static string NullButNotEmpty(string value, [InvokerParameterName] [NotNull] string parameterName)
+        public static string NullButNotEmpty(string value, [InvokerParameterName][NN] string parameterName)
         {
             if (!ReferenceEquals(value, null)
                 && (value.Length == 0))
@@ -109,7 +110,7 @@ namespace AspNetCore.Security.Auth0.Validation
             return value;
         }
 
-        public static IList<T> HasNoNulls<T>(IList<T> value, [InvokerParameterName] [NotNull] string parameterName)
+        public static IList<T> HasNoNulls<T>(IList<T> value, [InvokerParameterName][NN] string parameterName)
             where T : class
         {
             NotNull(value, parameterName);
